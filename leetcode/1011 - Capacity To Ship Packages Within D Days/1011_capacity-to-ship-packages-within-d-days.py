@@ -4,7 +4,26 @@ from leezy import solution, Solution
 class Q1011(Solution):
     @solution
     def shipWithinDays(self, weights, D):
-        pass
+        # ship capacity location
+        l, r = max(weights), sum(weights) 
+        # if 'while True', when weights = [x], then will enter a infinite loop
+        # if l == r, then len(weights) == 1, and inifite loop
+        while l < r:
+            mid = l + (r - l) // 2
+            day, tmp = 1, 0
+            for weight in weights:
+                tmp += weight
+                if tmp > mid:
+                    day += 1
+                    tmp = weight
+            if day > D:
+                l = mid + 1
+            else:
+                r = mid
+        return l
+                
+                
+
 
 
 def main():
