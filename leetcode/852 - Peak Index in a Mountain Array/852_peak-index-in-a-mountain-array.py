@@ -3,7 +3,6 @@ from leezy import solution, Solution
 
 class Q852(Solution):
     @solution
-
     def peakIndexInMountainArray(self, arr):
         # 40 ms faster than 79.34%, 15.7 MB less than 5.77%
         l, r = 0, len(arr) - 1
