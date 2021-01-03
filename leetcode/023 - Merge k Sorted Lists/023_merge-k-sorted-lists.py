@@ -1,10 +1,29 @@
 from leezy import solution, Solution
-
+from leezy.assists import ListNode
 
 class Q023(Solution):
     @solution
     def mergeKLists(self, lists):
-        pass
+        import heapq
+        heap = []
+        if not lists: return 
+        dummy = tail = ListNode(0)
+        for i in range(len(lists)):
+            if lists[i]:
+                heapq.heappush(heap,(lists[i].val, i))
+
+        while heap:
+            v, idx = heappop(heap)
+            tail.next = ListNode(v)
+            tail = tail.next
+            # lists[idx]一定是非 NoneType
+            if lists[idx].next:
+                heappush(heap, (lists[idx].next.val, idx))
+                lists[idx] = lists[idx].next
+
+        return dummy.next
+        
+        
 
 
 def main():
