@@ -1,5 +1,6 @@
 from leezy import solution, Solution
-from leezy.assists import ListNode, LinkedListContext
+from leezy.assists import LinkedListContext, ListNode
+
 
 class Q148(Solution):
     @solution
@@ -12,7 +13,7 @@ class Q148(Solution):
         mid = slow.next
         slow.next = None
         return self.merge(self.sortList(head), self.sortList(mid))
-    
+
     def merge(self, l1, l2):
         dummy = tail = ListNode(0)
         while l1 and l2:
