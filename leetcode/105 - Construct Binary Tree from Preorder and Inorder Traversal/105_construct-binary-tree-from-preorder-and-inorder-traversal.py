@@ -11,9 +11,7 @@ class Q105(Solution):
         root.right = self.buildTree(preorder[p+1:], inorder[p+1:])
         return root
 
-    from collections import deque
-
-
+   
 def main():
     q = Q105()
     q.add_case(q.case([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]))
