@@ -3,6 +3,7 @@ from leezy.assists import TreeContext
 
 
 class Q129(Solution):
+    
     @solution
     def sumNumbers(self, root):
         if root is None: return 0
@@ -22,6 +23,26 @@ class Q129(Solution):
             self.dfs(node.right, cur)
         cur = cur[:-1]
     
+    @solution
+    def sumNumbers_better(self, root):
+        if root is None: return 0
+        self.ans = 0
+        self.collect(root, 0)
+        return self.ans
+    
+    def collect(self, node, val):
+        if not node.left and not node.right:
+            self.ans += val * 10 + node.val
+            return
+        val  = val * 10 + node.val
+        if node.left:
+            self.collect(node.left, val)
+        if node.right:
+            self.collect(node.right, val)
+        
+
+
+        
 
 def main():
     q = Q129()
