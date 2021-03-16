@@ -18,9 +18,24 @@ class Q098(Solution):
             if x >= y:
                 return False
         return True
+    
+    @solution
+    def isValidBST_better(self, root):
+        # 上个解法用了额外的空间O(n), 可尝试优化，即在中序遍历递归的过程中判断
+        self.prev = None
 
+        def walk(node):
+            if node is None: return True
+            if not walk(node.left):
+                return False
+            if self.prev is not None and self.prev >= node.val:
+                return False
+            self.prev = node.val
+            if not walk(node.right):
+                return False
+            return True
         
-
+        return walk(root)
 
 
 def main():
