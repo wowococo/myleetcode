@@ -12,7 +12,7 @@ class Q054(Solution):
             ans.extend(matrix[i][k] for k in range(j, j+n))  # n个
             ans.extend(matrix[k][j+n-1] for k in range(i+1, i+1+m-1))   # m-1个
             ans.extend(matrix[i+m-1][k] for k in reversed(range(j, j+n-1))) # n-1个
-            ans.extend(matrix[k][j] for k in reversed(range(i+1, i+1+m-2)))  # m-2
+            ans.extend(matrix[k][j] for k in reversed(range(i+1, i+1+m-2)))  # m-2个 
             i += 1
             j += 1
             m -= 2
@@ -25,10 +25,33 @@ class Q054(Solution):
         
         return ans
 
+    @solution
+    def spiralOrder_review(self, matrix):
+        if not matrix: return []
+        ans = []
+        m, n = len(matrix), len(matrix[0])
+        i, j = 0, 0
+        while m >1 and n > 1:
+            ans.extend(matrix[i][k] for k in range(j, j+n)) # n
+            ans.extend(matrix[k][j+n-1] for k in range(i+1, i+1+m-1)) # m-1
+            ans.extend(matrix[i+m-1][k] for k in reversed(range(j, j+n-1)))  # n-1
+            ans.extend(matrix[k][j] for k in reversed(range(i+1, i+1+m-2)))  # m-2
+            
+            i += 1
+            j += 1
+            m -= 2
+            n -= 2
+        
+        if m == 1:
+            ans.extend(matrix[i][k] for k in range(j, j+n))  # n 
+        elif n == 1:
+            ans.extend(matrix[k][j] for k in range(i, i+m))  # m
+        
+        return ans
 
 def main():
     q = Q054()
-    q.add_case(q.case([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+    q.add_case(q.case([[1, 2, 3], [4, 5, 6], [7, 8, 9]]).assert_equal([1, 2, 3, 6, 9, 8, 7, 4, 5] ))
     q.run()
 
 
