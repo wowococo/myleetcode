@@ -4,7 +4,25 @@ from leezy import solution, Solution
 class Q070(Solution):
     @solution
     def climbStairs(self, n):
+        # 将空间复杂度降为o(1)
+        pre, cur = 1, 1
+        for _ in range(n):
+            pre, cur = cur, pre + cur
+        return pre
+    
+    @solution
+    def _climbStairs(self, n):
+        pre, cur = 1, 1
+        for _ in range(n):
+            sum = pre + cur
+            pre = cur
+            cur = sum
+        return pre
+
+    @solution
+    def climbStairs_fi(self, n):
         # f[i] = climbStairs[n]
+        # 动态规划，空间复杂度为o(n)
         f = [0] * (n + 1)
         f[0] = 1
         f[1] = 1
