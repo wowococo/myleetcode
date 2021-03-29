@@ -10,9 +10,8 @@ class Q001(Solution):
             return []
         n = len(nums)
         indexs = sorted(range(n), key=lambda i: nums[i])
-        # i，j代表 indexs 的索引  
-        i, j = 0, len(indexs) - 1     # 或者 i, j = 0, len(nums) - 1
-        
+        # i, j代表 indexs 的索引
+        i, j = 0, len(indexs) - 1   # or  i, j = 0, len(nums)-1
         while i < j:
             s = nums[indexs[i]] + nums[indexs[j]]
             if s < target:
@@ -21,6 +20,7 @@ class Q001(Solution):
                 j -= 1
             else:
                 return sorted([indexs[i], indexs[j]])
+        return  []
 
 
 def main():
