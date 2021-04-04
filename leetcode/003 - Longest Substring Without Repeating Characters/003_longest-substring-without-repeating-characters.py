@@ -15,6 +15,18 @@ class Q003(Solution):
             max_len = max(max_len, j-i+1)
             memo[s[j]] = j
         return max_len
+    
+    @solution
+    def lengthOfLongestSubstring_(self, s):
+        memo = {}
+        i = 0
+        max_len = 0
+        for j, x in enumerate(s):
+            if x in memo:
+                i = max(i, memo[x]+1)
+            max_len = max(max_len, j-i+1)
+            memo[x] = j
+        return max_len
 
 def main():
     q = Q003()
