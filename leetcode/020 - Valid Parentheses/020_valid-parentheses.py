@@ -4,6 +4,7 @@ from leezy import solution, Solution
 class Q020(Solution):
     @solution
     def isValid(self, s):
+        # 列表本身的右进右出， 本身就是后进先出， 就是栈的特性
         stack = []
         pair = {")": "(", "]": "[", "}": "{"}
         for x in s:
@@ -14,7 +15,7 @@ class Q020(Solution):
                     stack.pop()
                 else:
                     return False
-                    
+
         return len(stack) == 0
         
 def main():
