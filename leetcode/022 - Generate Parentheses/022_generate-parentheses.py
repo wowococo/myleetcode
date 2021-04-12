@@ -18,10 +18,11 @@ class Q022(Solution):
                 dfs(l, r+1, cur+')')
         dfs(0, 0, '')
         return total
+
             
 def main():
     q = Q022()
-    q.add_case(q.case(3))
+    q.add_case(q.case(3).assert_equal( ['((()))', '(()())', '(())()', '()(())', '()()()']))
     q.run()
 
 
