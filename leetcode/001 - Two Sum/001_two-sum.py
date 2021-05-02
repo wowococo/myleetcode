@@ -32,6 +32,24 @@ class Q001(Solution):
                     return [i, j]
         return []
 
+    @solution
+    def two_sum_review(self, nums, target):
+        # 40ms 66.56%
+        n = len(nums)
+        if nums is None or n < 2:
+            return []
+        indexs = sorted(range(n), key = lambda i: nums[i])
+        i, j = 0, len(indexs) - 1
+        while i < j:
+            s = nums[indexs[i]] + nums[indexs[j]]
+            if s == target:
+                return sorted([indexs[i], indexs[j]])
+            if s < target:
+                i += 1
+            else:
+                j -= 1
+        return []
+
 
 def main():
     q = Q001()
