@@ -15,13 +15,14 @@ class Q049(Solution):
             else:
                 ans.append([s])
                 memo[sorted_s] = len(ans) - 1
-                
+        
         return ans
 
             
 def main():
     q = Q049()
-    q.add_case(q.case(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']))
+    q.add_case(q.case([]).assert_equal([]))
+    q.add_case(q.case(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']).assert_equal([['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]))
     q.run()
 
 
