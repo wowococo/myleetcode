@@ -7,7 +7,7 @@ class Q049(Solution):
     def groupAnagrams(self, strs):
         # 56ms 77.80%
         ans = []
-        memo = {}
+        memo = {}  # key is sorted_s, value is the index that s in the ans.
         for s in strs:
             sorted_s = "".join(sorted(s))
             if sorted_s in memo:
