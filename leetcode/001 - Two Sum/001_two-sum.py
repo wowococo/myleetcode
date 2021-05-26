@@ -22,11 +22,40 @@ class Q001(Solution):
                 return sorted([indexs[i], indexs[j]])
         return  []
 
+    @solution
+    def twoSum_easy(self, nums, target):
+        # 40ms, 66.56%  O(n**2)
+        n = len(nums)
+        for i in range(n):
+            for j in range(i+1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+        return []
+
+    @solution
+    def two_sum_review(self, nums, target):
+        # 40ms 66.56%
+        n = len(nums)
+        if nums is None or n < 2:
+            return []
+        indexs = sorted(range(n), key = lambda i: nums[i])
+        i, j = 0, len(indexs) - 1
+        while i < j:
+            s = nums[indexs[i]] + nums[indexs[j]]
+            if s == target:
+                return sorted([indexs[i], indexs[j]])
+            if s < target:
+                i += 1
+            else:
+                j -= 1
+        return []
+
 
 def main():
     q = Q001()
     q.add_case(q.case([2, 7, 11, 15], 9).assert_equal([0, 1]))
     q.add_case(q.case([3, 2, 4], 6).assert_equal([1, 2]))
+    q.add_case(q.case([3], 3).assert_equal([]))
     q.run()
 
 if __name__ == '__main__':
