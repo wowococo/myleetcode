@@ -1,15 +1,15 @@
 from leezy import solution, Solution
 
 
-class Q198(Solution):
+class Q043(Solution):
     @solution
-    def rob(self, nums):
+    def multiply(self, num1, num2):
         pass
 
 
 def main():
-    q = Q198()
-    q.add_case(q.case([1, 2, 3, 1]))
+    q = Q043()
+    q.add_case(q.case('2', '3'))
     q.run()
 
 

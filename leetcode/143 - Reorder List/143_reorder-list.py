@@ -36,15 +36,40 @@ class Q143(Solution):
         reorder(head, n)
         return head
 
-
-
-
+    @solution
+    def reorderList_(self, head):
+        if not head or not head.next:
+            return head
+        node = head
+        n  = 0
+        while node:
+            n += 1
+            node = node.next
+        def reorder(head, length):
+            if length == 1:
+                outail = head.next
+                head.next = None
+                return outail
+            if length == 2:
+                outail = head.next.next
+                head.next.next = None
+                return outail
+            tail = reorder(head.next, length-2)
+            outail = tail.next
+            subhead = head.next
+            head.next = tail
+            tail.next = subhead
+            return outail
+        
+        reorder(head, n)
+        return head
 
 def main():
     q = Q143()
     q.set_context(LinkedListContext)
     q.add_case(q.case([1, 2, 3, 4]))
     q.add_case(q.case([1,2,3,4,5]))
+    q.add_case(q.case([1,2]))
     q.run()
 
 

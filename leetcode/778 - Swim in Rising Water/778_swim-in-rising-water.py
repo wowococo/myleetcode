@@ -1,15 +1,15 @@
 from leezy import solution, Solution
 
 
-class Q198(Solution):
+class Q778(Solution):
     @solution
-    def rob(self, nums):
+    def swimInWater(self, grid):
         pass
 
 
 def main():
-    q = Q198()
-    q.add_case(q.case([1, 2, 3, 1]))
+    q = Q778()
+    q.add_case(q.case([[0, 2], [1, 3]]))
     q.run()
 
 

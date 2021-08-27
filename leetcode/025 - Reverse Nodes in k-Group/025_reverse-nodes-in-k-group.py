@@ -7,7 +7,6 @@ class Q025(Solution):
         # 48ms 87.82%  recommend lc top answer 
         dummy = ListNode(0)
         dummy.next = head
-
         front = end = dummy
         while end.next:
             for _ in range(k):
@@ -18,23 +17,23 @@ class Q025(Solution):
             start = front.next
             nxt = end.next
             front.next = self.reverse(start, nxt)
-
+            
             front = end = start
 
         return dummy.next
 
-    
     def reverse(self, head, tail):
         if not head or not head.next:
             return head
-        cur = head
-        prev = tail
+        prev, cur = tail, head
         while cur != tail:
             temp = cur.next
             cur.next = prev
             prev = cur
             cur = temp
+            
         return prev
+    
 
 def main():
     q = Q025()

@@ -226,22 +226,35 @@ class Q(Solution):
         
         return dummy.next
             
-def topKstrings(self , strings , k ):
-    # write code here
-    counter = Counter(strings)
-    heap = []
-        
-    for s, cnt in counter.items():
-        if k > 0:
-            heappush(heap, (cnt, Rev(s)))
-            k -= 1
-        else:
-            heappushpop(heap, (cnt, Rev(s)))
-    ans = []
-    while heap:
-        cnt, s= heappop(heap)
-        ans.append([s.inner, cnt])
-    return ans[::-1]
+def reverseKGroup(self , head , k ):
+    if not head:
+        return
+    glb_head = ListNode(None)
+    grp_dummy = glb_head
+    grp_tail = head
+    cnt = 0
+    node = head
+    while node:
+        if cnt > 0 and cnt % k == 0:
+            grp_dummy = grp_tail
+            grp_dummy.next = None
+            grp_tail = node
+        nxt = node.next
+        node.next = grp_dummy.next
+        grp_dummy.next = node
+        node = nxt
+        cnt += 1
+
+    if cnt % k != 0:
+        node = grp_dummy.next
+        grp_dummy.next = None
+        while node:
+            nxt = node.next
+            node.next = grp_dummy.next
+            grp_dummy.next = node
+            node = nxt
+    return glb_head.next
+
     
 if __name__ == '__main__':
     q = Q()
@@ -265,5 +278,31 @@ def maxlenEqualK(arr , k ):
             ans = max(i - memo[counterpart], ans)
     return ans
 
+def longestValidParentheses(self , s ):
+    # write code here
+    farest = -1
+    ans = 0
+    stack = []
+    for i, ch in enumerate(s):
+        if ch == '(':
+            stack.append(i)
+        else:
+            if stack:
+                stack.pop()
+                ans = max(ans, i-(stack[-1] if stack else farest))
+            else:
+                farest = i
+    return ans
+
+def logged(func):
+    def with_logging(*args, **kwargs):
+        print(func.__name__ + " was called")
+        return func(*args, **kwargs)
+    return with_logging
+
+def f(x):
+    """does some math"""
+    return x + x * x
+
 if __name__ == "__main__":
-    print(maxlenEqualK([1,-2,1,1,1], 0))
+    f = logged(f)

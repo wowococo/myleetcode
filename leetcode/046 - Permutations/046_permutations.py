@@ -5,12 +5,12 @@ class Q046(Solution):
     @solution
     def permute(self, nums):
         # 32ms 95.48%
-        total, cur = [], []
+        cur, total = [], []
         N = len(nums)
         used = [False] * N
         def dfs():
-            if len(cur) == N:
-                total.append(cur.copy())
+            if len(cur) ==  N:
+                total.append(cur[:])
                 return
             for i in range(N):
                 if used[i]:
@@ -20,7 +20,7 @@ class Q046(Solution):
                 dfs()
                 cur.pop()
                 used[i] = False
-    
+
         dfs()
         return total
 

@@ -1,15 +1,15 @@
 from leezy import solution, Solution
 
 
-class Q198(Solution):
+class Q044(Solution):
     @solution
-    def rob(self, nums):
+    def isMatch(self, s, p):
         pass
 
 
 def main():
-    q = Q198()
-    q.add_case(q.case([1, 2, 3, 1]))
+    q = Q044()
+    q.add_case(q.case('aa', 'a'))
     q.run()
 
 

@@ -1,15 +1,15 @@
 from leezy import solution, Solution
 
 
-class Q198(Solution):
+class Q124(Solution):
     @solution
-    def rob(self, nums):
+    def maxPathSum(self, root):
         pass
 
 
 def main():
-    q = Q198()
-    q.add_case(q.case([1, 2, 3, 1]))
+    q = Q124()
+    q.add_case(q.case([1, 2, 3]))
     q.run()
 
 
