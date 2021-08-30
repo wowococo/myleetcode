@@ -30,23 +30,21 @@ class Q560(Solution):
     def subarraySum3(self, nums, k):
         # 前缀和，第 0 项到当前项的和, O(n), O(n); python in list O(n), in dict/set O(1) 
         # 68 ms, 89.45% 
-        N = len(nums)
-        count  = 0
+        count = 0
         prefix_sum = 0
-        psumcnt = {0:1}
-
-        for i in range(N):
+        psumcnt = {0: 1}
+        for i in range(len(nums)):
             prefix_sum += nums[i]
-        
-            if psumcnt.get(prefix_sum - k):
+
+            if (prefix_sum - k) in psumcnt:
                 count += psumcnt[prefix_sum - k]
             
             if prefix_sum in psumcnt:
                 psumcnt[prefix_sum] += 1
             else:
-                psumcnt[prefix_sum] = 1 
+                psumcnt[prefix_sum] = 1
 
-        return count     
+        return count 
         
 
 def main():
