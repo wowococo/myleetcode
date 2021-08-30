@@ -4,7 +4,7 @@ from leezy import solution, Solution
 class Q128(Solution):
     @solution
     def longestConsecutive(self, nums):
-        # 如果排序的话，复杂度一般要 O(nlogn)
+        # 如果使用排序的话，复杂度一般要 O(nlogn)
         # 要求 O(n), 强烈提示使用哈希表, hashtable {key: len} 以这个 key为边界的最长连续序列的长度
         # 108ms 31.34%
         h = {}
