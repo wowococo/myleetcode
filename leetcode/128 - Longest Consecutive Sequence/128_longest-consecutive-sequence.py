@@ -14,9 +14,10 @@ class Q128(Solution):
                 continue
             length = 1
             if num - 1 in h:
-                # num should be put in the right side
+                # num should be put at the right side
                 length += h[num-1]
             if num + 1 in h:
+                # num should be put at the left side
                 length += h[num+1]
             if num - 1 in h:
                 h[num-h[num-1]] = length
@@ -27,6 +28,26 @@ class Q128(Solution):
             ans = max(ans, length)
 
         return ans
+
+    @solution
+    def longest_consecutive(self, nums):
+        # 1732ms 12.25%  
+        h = {}
+        for num in nums:
+            h[num] = num
+        ans = 0
+        for num in nums:
+            if num-1 not in h: # o(1)
+                l = 0
+                while num in h: # o(2) 每个只会被访问两次
+                    l += 1
+                    num += 1
+                ans = max(ans, l)
+        
+        return ans
+        
+
+
 
 def main():
     q = Q128()
