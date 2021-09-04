@@ -20,6 +20,23 @@ class Q240(Solution):
 
         return False 
 
+    @solution
+    def search_matrix_II(self, matrix, target):
+        if not matrix or not matrix[0]:
+            return False
+        # i 表示行的最大值，j 表示列的最小值
+        i, j = len(matrix) - 1, 0
+        while i >= 0 and j < len(matrix[0]):
+            v = matrix[i][j]
+            if v == target:
+                return True
+            elif v < target:
+                j += 1
+            else:
+                i -= 1
+
+        return False
+
 def main():
     q = Q240()
     q.add_case(q.case([[1, 4, 7, 11, 15], [2, 5, 8, 12, 19], [3, 6, 9, 16, 22], [10, 13, 14, 17, 24], [18, 21, 23, 26, 30]], 5))
