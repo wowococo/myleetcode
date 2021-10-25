@@ -3,12 +3,32 @@ from leezy import solution, Solution
 
 class Q240(Solution):
     @solution
+    def search_matrix(self, matrix, target):
+        # O(nlogn)
+        if not matrix or not matrix[0]:
+            return False
+        m, n = len(matrix), len(matrix[0])
+        for i in range(m):
+            l, r = 0, n
+            while l < r:
+                mid = l + (r - l) // 2
+                v = matrix[i][mid]
+                if v == target:
+                    return True
+                elif v > target:
+                    r = mid
+                else:
+                    l = mid + 1
+        return False
+
+    @solution
     def searchMatrix(self, matrix, target):
         # 160ms 58.87%
         if not matrix or not matrix[0]:
             return False
         # i 代表行的最小值，j 代表列的最大值 
         i, j = 0, len(matrix[0])-1
+        #  此 while 循环利用了二分，是o(logn)
         while i < len(matrix) and j >= 0:
             v = matrix[i][j]
             if v == target:
