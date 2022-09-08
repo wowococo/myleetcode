@@ -21,7 +21,3 @@ def test_pnum():
 
 if __name__ == "__main__":
     test_pnum()
-
-
-def quick_sort():
-    
