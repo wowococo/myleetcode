@@ -9,10 +9,11 @@ import "math"
 
 // @lc code=start
 func minSubArrayLen(target int, nums []int) int {
-	max := int(math.Pow(5, 10) + 1)
+	l := len(nums)
+	max := l + 1
 	minSubLength := max
 	var sum, i, subLength int
-	for j := 0; j < len(nums); j++ {
+	for j := 0; j < l; j++ {
 		sum += nums[j]
 		for sum >= target {
 			subLength = j - i + 1
