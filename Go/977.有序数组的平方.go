@@ -6,8 +6,8 @@
 package main
 
 // @lc code=start
-func sortedSquares(nums []int) []int {
+// func sortedSquares(nums []int) []int {
 
-}
+// }
 
 // @lc code=end
