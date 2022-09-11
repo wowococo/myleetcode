@@ -7,26 +7,22 @@ package main
 
 // @lc code=start
 func sortedSquares(nums []int) []int {
-	index := len(nums) - 1
-	i, j := 0, index
+	n := len(nums)
+	i, j, k := 0, n-1, n-1
 	result := make([]int, len(nums))
 	for i <= j {
-		left, right := square(nums[i]), square(nums[j])
+		left, right := nums[i]*nums[i], nums[j]*nums[j]
 		if left < right {
-			result[index] = right
+			result[k] = right
 			j--
 		} else {
-			result[index] = left
+			result[k] = left
 			i++
 		}
-		index--
+		k--
 	}
 
 	return result
-}
-
-func square(num int) int {
-	return num * num
 }
 
 // @lc code=end
