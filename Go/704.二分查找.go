@@ -6,7 +6,7 @@
 package main
 
 // @lc code=start
-func search(nums []int, target int) int {
+func binarySearch(nums []int, target int) int {
 	// 将 [left, right] 作为循环不变量
 	left, right := 0, len(nums)-1
 	for left <= right {
@@ -15,6 +15,23 @@ func search(nums []int, target int) int {
 			left = mid + 1
 		} else if nums[mid] > target {
 			right = mid - 1
+		} else {
+			return mid
+		}
+	}
+
+	return -1
+}
+
+func search(nums []int, target int) int {
+	// 将[left, right) 作为循环不变量
+	left, right := 0, len(nums)
+	for left < right {
+		mid := left + (right-left)/2
+		if nums[mid] < target {
+			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid
 		} else {
 			return mid
 		}
