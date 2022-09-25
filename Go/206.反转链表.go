@@ -31,4 +31,18 @@ func reverseList(head *ListNode) *ListNode {
 
 }
 
+// 递归写法
+func reverseListRecur(head *ListNode) *ListNode {
+	return reverse(nil, head)
+}
+
+func reverse(pre, cur *ListNode) *ListNode {
+	if cur == nil {
+		return pre
+	}
+	temp := cur.Next
+	cur.Next = pre
+	return reverse(cur, temp)
+}
+
 // @lc code=end
