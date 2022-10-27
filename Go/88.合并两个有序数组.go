@@ -38,7 +38,3 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 }
 
 // @lc code=end
-
-func main() {
-	merge([]int{1,2,3,0,0,0}, 3, []int{2,5,6}, 3)
-}
