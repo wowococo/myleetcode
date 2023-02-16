@@ -27,3 +27,37 @@ func replaceSpace1(s string) string {
 
 	return string(newStr)
 }
+
+func replaceSpace2(s string) string {
+	length := len(s)
+	spaceNum := 0
+	for _, char := range s {
+		if char == ' ' {
+			spaceNum++
+		}
+	}
+
+	byteStr := []byte(s)
+	temp := make([]byte, spaceNum*2)
+	byteStr = append(byteStr, temp...)
+
+	i := length - 1
+	j := len(byteStr) - 1
+
+	for i >= 0 {
+		if s[i] == ' ' {
+			byteStr[j] = '0'
+			byteStr[j-1] = '2'
+			byteStr[j-2] = '%'
+			j = j - 3
+			i = i - 1
+		} else {
+			byteStr[j] = s[i]
+			j -= 1
+			i -= 1
+		}
+	}
+
+	return string(byteStr)
+
+}
