@@ -44,7 +44,7 @@ type stackItem struct {
 	node  *TreeNode
 }
 
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal2(root *TreeNode) []int {
 	const (
 		WHITE = 0
 		GREY  = 1
