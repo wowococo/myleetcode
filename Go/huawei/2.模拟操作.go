@@ -200,7 +200,7 @@ func ProcessCommand1(rules map[int]int, line string) string {
 	return "failed"
 }
 
-func main() {
+func main2() {
 	// 用 map 维护当前系统的规则状态 (rule_id -> rule_index)
 	rules := make(map[int]int)
 
