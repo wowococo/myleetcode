@@ -5,6 +5,15 @@ import "fmt"
 // 记住一个原则：用数组的第一个元素 nums[0] 来初始化 currentSum
 // 和 maxSum, 这是处理这类"最大子数组和"问题最无懈可击的写法，能天然防御全负数边界。
 
+/* 这也可以算是一道动态规划题，dp[i]：表示以 nums[i] 结尾 的 连续子数组的最大和。
+状态转移方程：
+if dp[i-1] < 0  : dp[i] = nums[i]
+if dp[i-1] >= 0:  dp[i] = dp[i-1] + nums[i]
+
+我现在的实现相当于把一个一维 dp 数组压缩成一个不断被覆盖的变量了，和最长公共子串那道题把
+二维 dp 压缩成一维 dp 是一样的思想。
+*/
+
 /*
 求数组的最大区间和
 
@@ -13,7 +22,7 @@ import "fmt"
 # 保证数组中至少有一个正数
 
 例：
-输入： {1,2,3,-7,8,-10}
+输入： {1,2,5,-7,8,-10}
 输出 9（子数组为： {1,2,5,-7,8}）
 */
 
@@ -55,13 +64,6 @@ func maxSubArray(nums []int) int {
 	return maxSum
 }
 
-/*
-💡 面试加分项（追问处理）
-如果面试官追问：“如果我不光要输出最大和，还要求输出具体是哪个子数组（比如输出 {1, 2, 5, -7, 8}），该怎么写？”
-
-你可以立刻补上记录索引的逻辑：只要在 currentSum < 0 重置起点时更新临时左边界 tempStart，在更新 maxSum 时同步记录最终的 bestStart 和 bestEnd 即可。
-*/
-
 // "保证数组中至少有一个正数"是降难度的提示，提示子数组和肯定是大于 0 的，因为最差可以只用这1 个正数
 // 在这种前提下，有个简化写法
 func maxSubArrayEasy(nums []int) int {
@@ -82,6 +84,14 @@ func maxSubArrayEasy(nums []int) int {
 
 	return maxSum
 }
+
+/*
+💡 面试加分项（追问处理）
+如果面试官追问：“如果我不光要输出最大和，还要求输出具体是哪个子数组（比如输出 {1, 2, 5, -7, 8}），该怎么写？”
+
+你可以立刻补上记录索引的逻辑：只要在 currentSum < 0 重置起点时更新临时左边界 tempStart，
+在更新 maxSum 时同步记录最终的 bestStart 和 bestEnd 即可。
+*/
 
 func maxSubArrayOutputSubArray(nums []int) (int, []int) {
 	// 边界处理：防御 nil 或者空切片

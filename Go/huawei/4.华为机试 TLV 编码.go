@@ -28,6 +28,7 @@ func parseTLV(s string) int {
 		}
 
 		// 4. 提取 Value 并校验其数值范围是否在 1-99 之间
+		// 服了，我理解错题了
 		valStr := s[i+2 : i+2+length]
 		valNum, err := strconv.Atoi(valStr)
 		if err != nil || valNum < 1 || valNum > 99 {
@@ -55,5 +56,46 @@ func parseTLV(s string) int {
 func main() {
 	// 示例：Tag='2', Len='2'(表示后面Value占2位), Value="30"(值为30，在1-99之间)
 	// baseLen = 1 + 1 + 2 = 4 (刚好是4的倍数，无需Padding)
-	fmt.Println(parseTLV("22303230")) // 输出: 2
+	fmt.Println(parseTLV2("22303230")) // 输出: 2
+}
+
+func parseTLV2(s string) int {
+	n := len(s)
+	i := 0
+	tagCount := 0
+
+	for i < n {
+		// 至少得有 2 位
+		if i+2 > n {
+			return 0
+		}
+
+		// 读取第 2 位作为 length
+		length := int(s[i+1] - '0')
+		if length <= 0 {
+			return 0
+		}
+
+		if i+2+length > n {
+			return 0
+		}
+
+		valStr := s[i+2 : i+2+length]
+		val, err := strconv.Atoi(valStr)
+		if err != nil || val < 1 || val > 99 {
+			return 0
+		}
+
+		baseLen := 1 + 1 + length
+		groupLen := (baseLen + 3) / 4 * 4
+
+		if i+groupLen > n {
+			return 0
+		}
+
+		tagCount++
+		i += groupLen
+
+	}
+	return tagCount
 }

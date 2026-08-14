@@ -10,8 +10,8 @@ import (
 // 第一种解法思路比较直接，
 // 使用 strings.Split 将两个版本号按 . 切分为字符串数组，
 // 然后逐个转换为整数比较。
-// 时间复杂度 O（N+M）
-// 空间复杂度 0（N+M）
+// 时间复杂度 O（M + N）
+// 空间复杂度 0（M + N）
 func compareVersion(version1 string, version2 string) int {
 	// 按 . 将字符串拆分为字符串切片
 	part1 := strings.Split(version1, ".")
@@ -49,8 +49,9 @@ func compareVersion(version1 string, version2 string) int {
 }
 
 // 第二种解法，双指针可以实现零内存分配
+// 两个指针都是从左向右推进
 // 第二种双指针 i, j 在内部各自遍历自己的
-// 时间复杂度：O(max(N,M))  --- 最多遍历较长的字符串一次
+// 时间复杂度：O(max(M, N))  --- 最多遍历较长的字符串一次
 // 空间复杂度：O(1) - 仅使用常数级别的额外空间
 func compareVersion2(version1 string, version2 string) int {
 	m, n := len(version1), len(version2)

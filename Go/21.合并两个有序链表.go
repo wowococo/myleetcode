@@ -14,8 +14,6 @@
  */
 package main
 
-import "container/list"
-
 // 递归写法
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	if list1 == nil {

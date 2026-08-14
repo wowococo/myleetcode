@@ -9,7 +9,8 @@ import "fmt"
 
 // @lc code=start
 func lengthOfLongestSubstring(s string) int {
-	// 遇到子串问题就要想到滑动窗口，滑动窗口意味着双指针，还有一个或者两个哈希表存储窗口里的值
+	// 遇到单个子串问题就要想到滑动窗口，滑动窗口意味着双指针，
+	// 还有一个或者两个哈希表存储窗口里的值
 	// 滑动窗口就是向右移动，不满足条件的就把左边的移出去，然后继续向右移动
 	left := 0
 	var res int
@@ -69,7 +70,7 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 	return maxLen
 }
 
-func main() {
+func main3() {
 	fmt.Println(lengthOfLongestSubstringTwoDistinct("eceba"))   // 输出: 3 (子串 "ece")
 	fmt.Println(lengthOfLongestSubstringTwoDistinct("ccaabbb")) // 输出: 5 (子串 "aabbb")
 }

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 // 滑动窗口
 // 看到单个子串问题可能要想到滑动窗口，滑动窗口意味着双指针[left, right],
@@ -39,6 +42,55 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 }
 
 func main3() {
-	fmt.Println(lengthOfLongestSubstringTwoDistinct("eceba"))   // 输出: 3 (子串 "ece")
-	fmt.Println(lengthOfLongestSubstringTwoDistinct("ccaabbb")) // 输出: 5 (子串 "aabbb")
+	fmt.Println(lengthOfLongestSubstringTwoDistinct2("eceba"))   // 输出: 3 (子串 "ece")
+	fmt.Println(lengthOfLongestSubstringTwoDistinct2("ccaabbb")) // 输出: 5 (子串 "aabbb")
+}
+
+func lengthOfLongestSubstringTwoDistinct2(s string) int {
+	if len(s) <= 2 {
+		return len(s)
+	}
+
+	left := 0
+	memo := make(map[byte]int)
+	res := 0
+
+	// right 向右移动表示扩大窗口，left 向右移动表示缩小窗口
+	for right := 0; right < len(s); right++ {
+		rightChar := s[right]
+		memo[rightChar]++
+
+		for len(memo) > 2 {
+			leftChar := s[left]
+			memo[leftChar]--
+			if memo[leftChar] == 0 {
+				delete(memo, leftChar)
+			}
+			left++
+		}
+
+		res = max(res, right-left+1)
+	}
+
+	return res
+}
+
+func TestRun(t *testing.T) {
+	cases := []struct {
+		name string
+		arg  string
+		want int
+	}{
+		{"1", "eceba", 3},
+		{"2", "ccaabbb", 5},
+		{"空串", "", 0},
+	}
+
+	for _, tt := range cases {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLongestSubstringTwoDistinct2(tt.arg); got != tt.want {
+				t.Errorf("result=%d, want=%d", got, tt.want)
+			}
+		})
+	}
 }

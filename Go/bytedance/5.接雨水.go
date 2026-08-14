@@ -35,7 +35,7 @@ func collectingRainWater(height []int) int {
 	}
 
 	// 这里 right 指向的是最后一个下标
-	// 一般双指针左右两边相向遍历的时候，right 都是指向的是最后一个下标
+	// 一般双指针左右两边相向而行遍历的时候，right 都是指向的是最后一个下标
 	left, right := 0, len(height)-1
 	leftMax, rightMax := 0, 0
 	totalWater := 0
