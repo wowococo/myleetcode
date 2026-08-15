@@ -10,35 +10,16 @@ package main
 //
 // @lc code=start
 func moveZeroes(nums []int) {
-	// 双指针法, j指向非零元素的下标，i 指向当前遍历的元素下标
-	j := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[i] != 0 {
-			nums[j] = nums[i]
-			j++
+	// 双指针法
+	// 不复制数组的情况下，使用快排的思想，但要保持非零元素的相对顺序
+	// 这个双指针起始点都从数组的开始,left用来操作左侧非零元素的赋值，right 用来遍历数组找到非零元素
+	left := 0
+	for right := 0; right < len(nums); right++ {
+		if nums[right] != 0 {
+			nums[left], nums[right] = nums[right], nums[left]
+			left++
 		}
-	}
-	// 将剩余位置填充为0
-	for j < len(nums) {
-		nums[j] = 0
-		j++
 	}
 }
 
 // @lc code=end
-
-// 一次遍历，借鉴快速排序的思路，快速排序的思想就是确定一个中间点 x，
-// 把小于等于 x的元素放在其左边，大于x 的元素放在右边
-// 应用在这里就是把 0 当做这个中间点，
-// 不等于 0 的元素放在左边，等于 0 的元素放在右边
-
-func moveZeroes2(nums []int) {
-	// 双指针法, j指向非零元素的下标，i 指向当前遍历的元素下标
-	j := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[i] != 0 {
-			nums[j], nums[i] = nums[i], nums[j]
-			j++
-		}
-	}
-}
