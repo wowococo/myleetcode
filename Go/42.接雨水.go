@@ -3,6 +3,7 @@
  *
  * [42] 接雨水
  */
+package main
 
 // @lc code=start
 func trap(height []int) int {
@@ -25,4 +26,3 @@ func trap(height []int) int {
 }
 
 // @lc code=end
-
