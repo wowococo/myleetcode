@@ -7,24 +7,23 @@ package main
 
 // @lc code=start
 func subarraySum(nums []int, k int) int {
-	// 任意子数组（包括前缀子数组）都可以表示为两个前缀和的差
-	// 要满足这个结论，需要定义一个初始值，前 0 个数的和为 0，前缀和为 0 的数组数量有 1 个
-	// 使用一个哈希表 memo 来存储前缀和以及它对应的数量， key 是前缀和，value是这个前缀和有多少个
-	memo := make(map[int]int, len(nums))
-	memo[0] = 1
-	ans := 0
-	presum := 0
+	// 任何子数组都的和可以表示为两个前缀和的差，包括前缀子数组本身，
+	// 要想包括前缀子数组也成立，需要设置一个初始值，前缀和为 0 的数组个数为 1 个
+	// 我们用 memo 存储前缀和及对应的前缀和的数量。
+	res := 0
+	mp := make(map[int]int, len(nums))
+	preSum := 0
+	mp[preSum] = 1
 	for _, num := range nums {
-		presum += num
-		// 1. 先检查（此时 map 里只有历史前缀和，不包含当前这个）
-		// 在 Go 语言中，从 map 里获取一个不存在的 key 时，会直接返回该类型的零值（对于 int 来说就是 0）。
-		ans += memo[presum-k]
-		// 2. 后更新，直接累加，即使 key 不存在，GO 会默认从 0 开始加
-		memo[presum]++
+		preSum += num
+		if count, ok := mp[preSum-k]; ok {
+			res += count
+		}
 
+		mp[preSum]++
 	}
 
-	return ans
+	return res
 }
 
 // @lc code=end
