@@ -6,8 +6,26 @@
 
 package main
 
+// 1 和 2 两种解法的区别是 curSum 初始化为 0 还是第一个元素，
+// 会导致下面 for 遍历起点的不同和 if curSum < 0 条件的写法不一样
+func maxSubArray1(nums []int) int {
+	// 可能有负数，所以 maxSum 初始化不能为 0，初始成数组里的第一个元素
+	maxSum := nums[0]
+	curSum := 0
+	for i := 0; i < len(nums); i++ {
+		if curSum < 0 {
+			// 说明前面的和对面没有帮助，舍弃前面的子数组
+			curSum = 0
+		}
+		curSum += nums[i]
+		maxSum = max(maxSum, curSum)
+	}
+
+	return maxSum
+}
+
 // @lc code=start
-func maxSubArray(nums []int) int {
+func maxSubArray2(nums []int) int {
 	// 边界处理：防御 nil 或者空切片
 	if len(nums) == 0 {
 		return 0
