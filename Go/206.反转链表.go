@@ -17,7 +17,6 @@ package main
 func reverseList(head *ListNode) *ListNode {
 	// 双指针
 	var pre *ListNode
-	pre = nil
 	cur := head
 
 	for cur != nil {
