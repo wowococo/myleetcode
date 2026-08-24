@@ -15,42 +15,30 @@
 
 package main
 
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	curA, curB := headA, headB
-	var lenA, lenB int
-	for curA != nil {
-		lenA++
-		curA = curA.Next
-	}
-
-	for curB != nil {
-		lenB++
-		curB = curB.Next
-	}
-
-	if lenB > lenA {
-		lenA, lenB = lenB, lenA
-		headA, headB = headB, headA
-	}
-
-	gap := lenA - lenB
-	curA, curB = headA, headB
-
-	for gap > 0 {
-		curA = curA.Next
-		gap--
-	}
-
-	for curA != nil {
-		if curA == curB {
-			return curA
+	// h1 先走 A 再走 B 链表，h2 先走 B 再走 A 链表
+	h1 := headA
+	h2 := headB
+	for h1 != h2 {
+		if h1 != nil {
+			h1 = h1.Next
+		} else {
+			h1 = headB
 		}
-		curA = curA.Next
-		curB = curB.Next
+
+		if h2 != nil {
+			h2 = h2.Next
+		} else {
+			h2 = headA
+		}
 	}
 
-	return nil
-
-}
-
-// @lc code=end
+	return h1
+} // @lc code=end
