@@ -14,6 +14,31 @@
  */
 package main
 
+func mergeTwoListsIter(list1 *ListNode, list2 *ListNode) *ListNode {
+	// 迭代写法，创建虚拟节点 dummy可以避免判断一些边界情况的处理，比如不用判断
+	// 空链表的情况了，再创建一个 tail 节点指向 链表的最后元素，初始等于 dummy
+	dummy := &ListNode{}
+	tail := dummy
+	for list1 != nil && list2 != nil {
+		if list1.Val <= list2.Val {
+			tail.Next = list1
+			list1 = list1.Next
+		} else {
+			tail.Next = list2
+			list2 = list2.Next
+		}
+		tail = tail.Next
+	}
+
+	if list1 != nil {
+		tail.Next = list1
+	} else if list2 != nil {
+		tail.Next = list2
+	}
+
+	return dummy.Next
+}
+
 // 递归写法
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	if list1 == nil {
@@ -34,25 +59,3 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 }
 
 // @lc code=end
-
-// 迭代写法,迭代写法就是要构造一个虚拟节点 dummy
-func mergeTwoListsIter(list1 *ListNode, list2 *ListNode) *ListNode {
-	dummy := &ListNode{Val: 0}
-	tail := dummy
-	for list1 != nil && list2 != nil {
-		if list1.Val > list2.Val {
-			list1, list2 = list2, list1
-		}
-		tail.Next = list1
-		list1 = list1.Next
-		tail = tail.Next
-	}
-	if list1 != nil {
-		tail.Next = list1
-	}
-	if list2 != nil {
-		tail.Next = list2
-	}
-
-	return dummy.Next
-}
