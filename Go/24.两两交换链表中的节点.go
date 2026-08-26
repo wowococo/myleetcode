@@ -16,17 +16,21 @@
 package main
 
 func swapPairs(head *ListNode) *ListNode {
-	// 交换两个结点需要知道这两个结点的前后两个结点
-	dummy := &ListNode{}
-	dummy.Next = head
-	cur := dummy
-	for cur.Next != nil && cur.Next.Next != nil {
-		temp1 := cur.Next
-		temp2 := cur.Next.Next.Next
-		cur.Next = cur.Next.Next
-		cur.Next.Next = temp1
-		temp1.Next = temp2
-		cur = cur.Next.Next
+	// 四个指针，pre, first, second, nxt
+	dummy := &ListNode{Next: head}
+	pre := dummy
+	first := head
+
+	for first != nil && first.Next != nil {
+		second := first.Next
+		nxt := second.Next
+
+		pre.Next = second
+		second.Next = first
+		first.Next = nxt
+
+		pre = first
+		first = nxt
 	}
 
 	return dummy.Next
