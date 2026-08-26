@@ -12,8 +12,9 @@ type MyLinkedList struct {
 }
 
 type Node struct {
-	Val  int
-	Next *Node
+	Val    int
+	Next   *Node
+	Random *Node
 }
 
 func Constructor() MyLinkedList {
