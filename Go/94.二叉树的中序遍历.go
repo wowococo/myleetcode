@@ -38,49 +38,25 @@ func inorderTraversal(root *TreeNode) (res []int) {
 }
 
 // @lc code=end
-
-// 迭代做法，通用模板颜色标记法，利用栈来实现
-// 1. 新节点为白色，已访问过的节点为灰色
-// 2. 当遇到白色节点时，标记为灰色，把节点的右侧、自身、左侧加入栈
-// 3. 当遇到灰色节点时，则将节点的值输出。
-// Go 里使用结构体来模拟 python 的元组，使用切片操作来模拟栈的 pop，stack[:len(stack)-1]来实现弹栈操作
-type stackItem struct {
-	color int
-	node  *TreeNode
-}
-
-func inorderTraversal2(root *TreeNode) []int {
-	const (
-		WHITE = 0
-		GREY  = 1
-	)
-
-	var res []int
-
-	stack := []stackItem{
-		{color: WHITE, node: root},
-	}
-
-	for len(stack) > 0 {
-		// pop操作
-		topID := len(stack) - 1
-		curr := stack[topID]
-		stack = stack[:topID]
-
-		if curr.node == nil {
-			continue
+// 迭代写法（必考），使用栈来模拟，中序遍历是左根右
+func inorderTraversalIter(root *TreeNode) []int {
+	res := make([]int, 0)
+	// 定义栈，使用切片
+	stack := make([]*TreeNode, 0)
+	cur := root
+	for cur != nil || len(stack) > 0 {
+		for cur != nil {
+			stack = append(stack, cur)
+			cur = cur.Left
 		}
-
-		if curr.color == WHITE {
-			// 由于栈是后进先出的，为了实现“左根右“的中序遍历，入栈顺序必须反过来，即右根左
-			stack = append(stack, stackItem{color: WHITE, node: curr.node.Right})
-			stack = append(stack, stackItem{color: GREY, node: curr.node})
-			stack = append(stack, stackItem{color: WHITE, node: curr.node.Left})
-		} else {
-			// GREY状态，直接记录数值
-			res = append(res, curr.node.Val)
-		}
+		// 直至cur 为 nil，取出此时栈顶元素，此时栈顶节点的左子树为 nil，
+		// 栈顶算是当前这个节点的根节点
+		top := stack[len(stack)-1]
+		res = append(res, top.Val)
+		stack = stack[:len(stack)-1]
+		// 然后访问这个节点的右子树
+		cur = top.Right
+		// 以右子树为根节点继续下一轮 for 循环
 	}
-
 	return res
 }
