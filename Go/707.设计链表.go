@@ -17,7 +17,7 @@ type Node struct {
 	Random *Node
 }
 
-func Constructor() MyLinkedList {
+func ConstructorLinkedList() MyLinkedList {
 	return MyLinkedList{
 		Dummy: &Node{
 			Val:  0,
