@@ -14,11 +14,6 @@ package main
  *     Right *TreeNode
  * }
  */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 // 哪个序遍历是根节点在哪个位置，比如说中序遍历就是根节点在中间
 // 左、中、右
