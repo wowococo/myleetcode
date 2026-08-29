@@ -15,6 +15,7 @@
  */
 package main
 
+// 迭代的思路
 func isSymmetric(root *TreeNode) bool {
 	// 循环判断每一层是否是对称的，如何判断每一层是对称的，
 	// 使用两个队列，左子树从左向右存储节点，右子树从右向左存储节点
@@ -50,6 +51,27 @@ func isSymmetric(root *TreeNode) bool {
 
 	// 都遍历完了，有问题的话，上面循环里就直接返回 false 了
 	return true
+}
+
+// 递归写法
+func isSymmetricRecur(root *TreeNode) bool {
+	// 再来个递归写法, p,q 一开始都指向根节点，然后开始向左右子树移动
+	if root == nil {
+		return true
+	}
+	return check(root.Left, root.Right)
+}
+
+func check(p, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+
+	if p == nil || q == nil {
+		return false
+	}
+
+	return p.Val == q.Val && check(p.Left, q.Right) && check(p.Right, q.Left)
 }
 
 // @lc code=end
