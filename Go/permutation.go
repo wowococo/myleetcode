@@ -1,14 +1,14 @@
 package main
 
-func permute(nums []int) [][]int {
+func permuteMe(nums []int) [][]int {
 	cur, total := make([]int, 0), make([][]int, 0)
 	used := make([]bool, len(nums))
-	dfs(len(nums), cur, &total, nums, used)
+	dfsMe(len(nums), cur, &total, nums, used)
 	return total
 
 }
 
-func dfs(n int, cur []int, total *[][]int, nums []int, used []bool) {
+func dfsMe(n int, cur []int, total *[][]int, nums []int, used []bool) {
 	if len(cur) == n {
 		*total = append(*total, cur)
 		return
@@ -19,7 +19,7 @@ func dfs(n int, cur []int, total *[][]int, nums []int, used []bool) {
 		}
 		cur = append(cur, nums[i])
 		used[i] = true
-		dfs(n, cur, total, nums, used)
+		dfsMe(n, cur, total, nums, used)
 		cur = cur[:len(cur)-1]
 		used[i] = false
 	}
