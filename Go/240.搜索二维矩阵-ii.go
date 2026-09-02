@@ -6,7 +6,7 @@
 package main
 
 // @lc code=start
-func searchMatrix(matrix [][]int, target int) bool {
+func searchMatrixII(matrix [][]int, target int) bool {
 	// 最上面一行到最后一行这条路都是升序的
 	// 整行整列切除，从右上角开始比较，根据大小决定切右边的列还是切上面行
 	m, n := len(matrix), len(matrix[0])
