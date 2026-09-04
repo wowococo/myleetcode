@@ -35,8 +35,8 @@ func (h MinHeap) Less(i, j int) bool { return h[i] < h[j] } //最小堆
 func (h MinHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
 // push 和 pop 必须用指针接收者，因为会修改切片长度
-func (h *MinHeap) Push(val any) {
-	*h = append(*h, val.(int))
+func (h *MinHeap) Push(x any) {
+	*h = append(*h, x.(int))
 }
 
 func (h *MinHeap) Pop() any {
